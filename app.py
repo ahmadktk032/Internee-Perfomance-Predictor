@@ -7,6 +7,7 @@ from sklearn.neighbors import KNeighborsRegressor
 from sklearn.linear_model import LinearRegression
 from xgboost import XGBRegressor
 
+
 # Page layout
 st.set_page_config(page_title="Internee Performance Predictor", layout="centered")
 
