@@ -1,4 +1,3 @@
-```markdown
 # Internee Performance Predictor
 
 This project aims to build a machine-learning regression model to predict intern performance scores based on key training metrics such as task completion rates (completion time), task feedback, and attendance rates.
@@ -54,4 +53,3 @@ We trained and evaluated several regression algorithms using an **80/20 train-te
    pip install pandas numpy scikit-learn xgboost matplotlib seaborn
    ```
 3. Run the Jupyter/Google Colab Notebook to see the training pipeline and evaluations step-by-step.
-```
