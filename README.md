@@ -1,6 +1,6 @@
-# Internee Performance Predictor
+# Internee Performance Predictor & Interactive Web App
 
-This project aims to build a machine-learning regression model to predict intern performance scores based on key training metrics such as task completion rates (completion time), task feedback, and attendance rates.
+This project features a machine-learning regression pipeline and an interactive Streamlit web application to predict intern performance scores based on key training metrics.
 
 ## 📋 Project Overview
 
@@ -16,17 +16,16 @@ This project aims to build a machine-learning regression model to predict intern
 
 1. **Feature Dropping**: Dropped `Intern_ID` as it acts only as an identifier and contains no predictive signal.
 2. **Handling Missing Values**:
-   - Replacements were chosen based on the distribution of each feature:
-     - `Completion_Time` & `Attendance` nulls were filled with their respective column **mean** values.
-     - `Feedback_Rating` nulls were filled with the column **median** value.
+   - `Completion_Time` & `Attendance` nulls were filled with their respective column **mean** values.
+   - `Feedback_Rating` nulls were filled with the column **median** value.
 3. **Feature Transformation**:
-   - Mentors usually evaluate using discrete ratings. Thus, the float values in `Feedback_Rating` were rounded to integers using the round function.
+   - `Feedback_Rating` float values were rounded to discrete integers to reflect standard evaluation ratings.
 
 ---
 
 ## 🧪 Machine Learning Models & Evaluation
 
-We trained and evaluated several regression algorithms using an **80/20 train-test split**. Here are the results of our experiments:
+We trained and evaluated several regression algorithms using an **80/20 train-test split**:
 
 | Model | Hyperparameters | Mean Squared Error (MSE) | Root Mean Squared Error (RMSE) | Mean Absolute Error (MAE) |
 | :--- | :--- | :---: | :---: | :---: |
@@ -36,20 +35,27 @@ We trained and evaluated several regression algorithms using an **80/20 train-te
 | **K-Neighbors Regressor** | n_neighbors=15 | 109.42 | 10.46 | 8.57 |
 | **Linear Regression** | default | 100.92 | 10.05 | 8.17 |
 
-### 🔑 Key Findings
-- **XGBoost Regressor** yielded the best overall performance with the lowest prediction error (**MAE of 8.02**).
-- Restraining tree depth (e.g., `max_depth=5` in Random Forest) significantly helped avoid overfitting given the small feature set (3 features).
-
 ---
 
-## 🚀 How to Run
+## 🚀 Streamlit Interactive Web Application
 
-1. Clone the repository:
+An interactive web dashboard is included to let you make live predictions and dynamically swap between all four trained models (**XGBoost**, **Tuned Random Forest**, **Linear Regression**, and **KNN Regressor**).
+
+### How to Run the App
+
+1. **Install Dependencies**:
    ```bash
-   git clone https://github.com/your-username/internee-performance-predictor.git
+   pip install streamlit xgboost scikit-learn pandas numpy
+   npm install -g localtunnel
    ```
-2. Install required dependencies:
+
+2. **Launch the Streamlit Server**:
    ```bash
-   pip install pandas numpy scikit-learn xgboost matplotlib seaborn
+   streamlit run app.py
    ```
-3. Run the Jupyter/Google Colab Notebook to see the training pipeline and evaluations step-by-step.
+
+3. **Expose with Localtunnel (for Google Colab environment)**:
+   ```bash
+   npx localtunnel --port 8501
+   ```
+   Use your public IP (displayed in the notebook run cell) as the password to unlock the secure localtunnel URL.
